@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "sync-resume": "node scripts/generate-resume-data.cjs",
+    "predev": "npm run sync-resume",
+    "prebuild": "npm run sync-resume",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -14,6 +17,8 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "framer-motion": "^12.23.24",
+    "lucide-react": "^0.553.0",
     "next": "^14.2.33",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
