@@ -20,7 +20,8 @@ app.add_middleware(
 )
 
 # Build the retrieval-augmented generation chain once so the backend can
-# share cached embeddings and model clients across incoming requests.
+# share cached embeddings, load persisted vector stores, and reuse model clients
+# across incoming requests.
 qa_chain = build_rag_chain()
 
 class Query(BaseModel):

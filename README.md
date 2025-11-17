@@ -8,8 +8,8 @@ experience for quickly querying the assistant.
 
 ## Architecture
 - `main.py`: FastAPI entrypoint and REST surface for the RAG chain.
-- `backend/utils/rag_pipeline.py`: Document ingestion, chunking, embeddings, and
-  LangChain wiring for the assistant.
+- `backend/utils/rag_pipeline.py`: Document ingestion, chunking, embeddings, FAISS
+  persistence, and LangChain wiring for the assistant.
 - `frontend/`: Next 14 client-side UI that calls the `/ask` endpoint via fetch.
 
 ## Requirements
@@ -34,6 +34,8 @@ experience for quickly querying the assistant.
    ```ini
    OPENAI_API_KEY=sk-...
    OPENAI_LLM_MODEL=gpt-4o-mini
+   # Optional: override where FAISS snapshots are stored
+   # RAG_FAISS_CACHE_DIR=C:/tmp/resume-assistant-cache
    ```
 4. Place your resume artifacts inside `backend/resumeMaterial/`. Both `.docx` and
    `.txt` files are supported and will be chunked automatically.
@@ -60,6 +62,13 @@ With both services running locally:
 ```bash
 curl "http://127.0.0.1:8000/ask?question=Where%20did%20Jiashu%20study%3F"
 ```
+
+## Embedding cache
+- The backend saves the FAISS index in `backend/vector_cache/` (override with
+  `RAG_FAISS_CACHE_DIR`). Startup will reuse this cache if none of the files in
+  `backend/resumeMaterial/` changed (size + modified time fingerprint).
+- Delete the cache directory or run the extractor when your resume content
+  updates to force regeneration.
 
 ## Deployment notes
 - Lock dependencies in `requirements.txt` / `package-lock.json` before pushing to
