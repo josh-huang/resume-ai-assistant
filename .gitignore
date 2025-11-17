@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Node/Next.js artifacts
+frontend/node_modules/
+frontend/.next/
+
+# IDE / OS
+.idea/
+.DS_Store
+
+# Build artifacts
+dist/
+build/
+
