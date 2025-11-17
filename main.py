@@ -36,7 +36,7 @@ async def read_root():
     return {"message": "Hello World"}
 
 @app.get("/ask")
-async def ask_get(question: str = "Please tell me what school did you study in"):
+async def ask_get(question: str):
     """GET alternative so tools/browsers can hit /ask without crafting JSON."""
     result = qa_chain.invoke({"query": question})
     return {"answer": result["result"]}
